@@ -1,7 +1,9 @@
 package com.clx.registerDevices;
 
-import com.clx.registerDevices.services.RegisterDevicesServices;
-import com.clx.registerDevices.view.SearchDevices;
+import com.clx.registerDevices.services.ecorp.RegisterDevicesEcorpServicesImpl;
+import com.clx.registerDevices.services.retail.RegisterDevicesRetailServicesImpl;
+import com.clx.registerDevices.view.SearchDevicesForEcorpApp;
+import com.clx.registerDevices.view.SearchDevicesForRetailApp;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.builder.SpringApplicationBuilder;
 import org.springframework.context.annotation.ComponentScan;
@@ -17,14 +19,17 @@ public class SwingApp extends JFrame {
     private JPanel jContentPane = null;
     private JMenuBar jJMenuBar = null;
     private JMenu jMenuSearch = null;
-    private JMenuItem jMenuItemSearchDevices = null;
+    private JMenuItem jMenuItemSearchDevicesRetail = null;
+    private JMenuItem jMenuItemSearchDevicesEcorp = null;
     private JMenu jMenuSair = null;
     private JMenuItem jMenuItemSair = null;
 
-    private final RegisterDevicesServices registerDevicesServices;
+    private final RegisterDevicesRetailServicesImpl registerDevicesRetailServicesImpl;
+    private final RegisterDevicesEcorpServicesImpl registerDevicesEcorpServicesImpl;
 
-    public SwingApp(RegisterDevicesServices registerDevicesServices) {
-        this.registerDevicesServices = registerDevicesServices;
+    public SwingApp(RegisterDevicesRetailServicesImpl registerDevicesRetailServicesImpl, RegisterDevicesEcorpServicesImpl registerDevicesEcorpServicesImpl) {
+        this.registerDevicesRetailServicesImpl = registerDevicesRetailServicesImpl;
+        this.registerDevicesEcorpServicesImpl = registerDevicesEcorpServicesImpl;
     }
 
 
@@ -88,7 +93,8 @@ public class SwingApp extends JFrame {
         if (jMenuSearch == null) {
             jMenuSearch = new JMenu();
             jMenuSearch.setText("Search");
-            jMenuSearch.add(getJMenuItemSearchDevices());
+            jMenuSearch.add(getJMenuItemSearchDevicesRetail());
+            jMenuSearch.add(getjMenuItemSearchDevicesEcorp());
         }
         return jMenuSearch;
     }
@@ -98,19 +104,38 @@ public class SwingApp extends JFrame {
      *
      * @return javax.swing.JMenuItem
      */
-    private JMenuItem getJMenuItemSearchDevices() {
-        if (jMenuItemSearchDevices == null) {
-            jMenuItemSearchDevices = new JMenuItem();
-            jMenuItemSearchDevices.setText("Search Devices");
-            jMenuItemSearchDevices
+    private JMenuItem getJMenuItemSearchDevicesRetail() {
+        if (jMenuItemSearchDevicesRetail == null) {
+            jMenuItemSearchDevicesRetail = new JMenuItem();
+            jMenuItemSearchDevicesRetail.setText("Search Devices Retail");
+            jMenuItemSearchDevicesRetail
                     .addActionListener(new java.awt.event.ActionListener() {
                         public void actionPerformed(java.awt.event.ActionEvent e) {
-                            SearchDevices p = new SearchDevices(registerDevicesServices);
+                            SearchDevicesForRetailApp p = new SearchDevicesForRetailApp(registerDevicesRetailServicesImpl);
                             p.getJFrame().setVisible(true);
                         }
                     });
         }
-        return jMenuItemSearchDevices;
+        return jMenuItemSearchDevicesRetail;
+    }
+
+    /**
+     * This method initializes jMenuItemPesquisaMarca
+     *
+     * @return javax.swing.JMenuItem
+     */
+    private JMenuItem getjMenuItemSearchDevicesEcorp() {
+        if (jMenuItemSearchDevicesEcorp == null) {
+            jMenuItemSearchDevicesEcorp = new JMenuItem();
+            jMenuItemSearchDevicesEcorp.setText("Search Devices Ecorp");
+            jMenuItemSearchDevicesEcorp.addActionListener(new java.awt.event.ActionListener() {
+                        public void actionPerformed(java.awt.event.ActionEvent e) {
+                            SearchDevicesForEcorpApp p = new SearchDevicesForEcorpApp(registerDevicesEcorpServicesImpl);
+                            p.getJFrame().setVisible(true);
+                        }
+                    });
+        }
+        return jMenuItemSearchDevicesEcorp;
     }
 
 

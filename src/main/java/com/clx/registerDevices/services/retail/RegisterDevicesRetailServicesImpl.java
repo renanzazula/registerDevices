@@ -1,9 +1,10 @@
-package com.clx.registerDevices.services;
+package com.clx.registerDevices.services.retail;
 
 import alahli.trustedDevices.DeviceDTO;
 import com.clx.registerDevices.entity.retail.User;
 import com.clx.registerDevices.exceptions.UserNotFoundException;
 import com.clx.registerDevices.repository.retail.UserRepository;
+import com.clx.registerDevices.services.RegisterDevicesServicesInterface;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.databind.type.MapType;
 import com.fasterxml.jackson.databind.type.TypeFactory;
@@ -17,12 +18,12 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-public class RegisterDevicesServices {
+public class RegisterDevicesRetailServicesImpl implements RegisterDevicesServicesInterface {
 
-    Logger logger = LoggerFactory.getLogger(RegisterDevicesServices.class);
+    Logger logger = LoggerFactory.getLogger(RegisterDevicesRetailServicesImpl.class);
     private final UserRepository userRepository;
 
-    public RegisterDevicesServices(UserRepository userRepository) {
+    public RegisterDevicesRetailServicesImpl(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 

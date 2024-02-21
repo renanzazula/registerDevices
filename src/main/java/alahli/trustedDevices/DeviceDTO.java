@@ -13,7 +13,7 @@ public class DeviceDTO implements Serializable {
     @Transient
     private String userName;
     private String nameDevice;
-    private final String registerTime;
+    private String registerTime;
     private String lastLogin;
     private String uuid;
 
@@ -21,6 +21,12 @@ public class DeviceDTO implements Serializable {
         super();
         this.nameDevice = nameDevice;
         this.registerTime= DateTime.now().toString();
+    }
+
+    public DeviceDTO(String userName, String nameDevice, String uuid) {
+        this.userName = userName;
+        this.nameDevice = nameDevice;
+        this.uuid = uuid;
     }
 
     public DeviceDTO() {

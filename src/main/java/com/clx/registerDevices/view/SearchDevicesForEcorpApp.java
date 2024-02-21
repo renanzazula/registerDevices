@@ -2,7 +2,7 @@ package com.clx.registerDevices.view;
 
 import alahli.trustedDevices.DeviceDTO;
 import com.clx.registerDevices.exceptions.UserNotFoundException;
-import com.clx.registerDevices.services.RegisterDevicesServices;
+import com.clx.registerDevices.services.RegisterDevicesServicesInterface;
 import org.springframework.util.StringUtils;
 
 import javax.swing.*;
@@ -12,7 +12,7 @@ import java.awt.*;
 import java.util.List;
 import java.util.Vector;
 
-public class SearchDevices extends JFrame{
+public class SearchDevicesForEcorpApp extends JFrame{
 
 	private JFrame jFrame = null;
 	private JPanel jContentPane = null;
@@ -42,9 +42,9 @@ public class SearchDevices extends JFrame{
 	private JTable jTResult = null;
 	private JButton jBExit = null;
 
-	private final RegisterDevicesServices registerDevicesServices;
+	private final RegisterDevicesServicesInterface registerDevicesServices;
 
-	public SearchDevices(RegisterDevicesServices registerDevicesServices) {
+	public SearchDevicesForEcorpApp(RegisterDevicesServicesInterface registerDevicesServices) {
 		this.registerDevicesServices = registerDevicesServices;
 	}
 
